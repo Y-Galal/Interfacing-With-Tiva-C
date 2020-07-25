@@ -12,14 +12,14 @@ void delay()                    /* Delay function "not an efficient one but work
 }
 int main()
 {
-    PIN_CONFIG LED1 = {PORTF,PIN1,OUTPUT,TWO,OPEN_DRAIN} ;  /* Internal Red LED*/
-    PIN_CONFIG LED2 = {PORTF,PIN2,OUTPUT,TWO,OPEN_DRAIN} ;  /* Internal Green LED*/
-    PIN_CONFIG LED3 = {PORTF,PIN3,OUTPUT,TWO,OPEN_DRAIN} ;  /* Internal Blue LED*/
+    PIN_CONFIG LED1 = {PORTF,PIN1,OUTPUT,PULL_UP,TWO} ;  /* Internal Red LED*/
+    PIN_CONFIG LED2 = {PORTF,PIN2,OUTPUT,PULL_UP,TWO} ;  /* Internal Green LED*/
+    PIN_CONFIG LED3 = {PORTF,PIN3,OUTPUT,PULL_UP,TWO} ;  /* Internal Blue LED*/
     GPIO_configureDigitalPin(&LED1);                        /* Sending the configuration structure to set the required pin*/
     GPIO_configureDigitalPin(&LED2);
     GPIO_configureDigitalPin(&LED3);
     
-    PIN_CONFIG Button1 = {PORTF,PIN0,INPUT,TWO,PULL_UP};    /* Internal Switch (right switch)*/
+    PIN_CONFIG Button1 = {PORTF,PIN0,INPUT,PULL_UP,TWO};    /* Internal Switch (right switch)*/
     GPIO_configureDigitalPin(&Button1);
 
     while(1)
