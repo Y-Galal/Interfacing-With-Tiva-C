@@ -126,9 +126,11 @@ static void setCurrent( uint32 Port , uint8 Current ,uint32 Pin)
     return ;
 }
 
-/**************************************************************************/
-/*                              Public Functions                          */
 
+
+/*************************************************************************/
+/*                            Public Functions                           */
+/*************************************************************************/
 
 /* Function Name: GPIO_configureDigitalPin
 *  Fucntion description: Takes the required configuration and sets it  
@@ -168,7 +170,7 @@ void GPIO_configureDigitalPin(const PIN_CONFIG *config)
     SET_BIT( config->Port , GPIODEN , config -> Pin ) ;
 
     /* 8- Locking the port again */
-    lockPort(config -> Port);
+    //lockPort(config -> Port);
 }
 
 
@@ -196,4 +198,8 @@ uint8 GPIO_readData(uint32 Port, uint32 Pin)
 {
     return ( BIT_IS_SET(Port,GPIODATA,Pin) );
 }
+
+
+
+
 
