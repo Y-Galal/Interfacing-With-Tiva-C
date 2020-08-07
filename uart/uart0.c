@@ -53,7 +53,7 @@ void UART_init(uint32 clock , uint32 baudrate)
 */
 void UART_sendByte(const uint8 data)
 {
-    while( (BIT_IS_SET(PORTA,UART_FR,TXFF)) != 0 ){}       /*staying in loop while the TXFF=1 and the FIFO is full*/
+    while( (BIT_IS_SET(UART0,UART_FR,TXFF)) != 0 ){}       /*staying in loop while the TXFF=1 and the FIFO is full*/
     ACCESS_REG(UART0,UART_DR) = data;
 }
 
@@ -63,7 +63,7 @@ void UART_sendByte(const uint8 data)
 */
 uint8 UART_receiveByte(void)
 {
-    while( (BIT_IS_SET(PORTA,UART_FR,RXFE)) !=0 ){}       /*staying in loop while RXFF=1 and the FIFO is full*/
+    while( (BIT_IS_SET(UART0,UART_FR,RXFE)) !=0 ){}       /*staying in loop while RXFF=1 and the FIFO is full*/
 
     return ( (uint8)(ACCESS_REG(UART0,UART_DR) & 0xFF ));   /*the receiver can receive data now*/
 }
@@ -74,11 +74,13 @@ uint8 UART_receiveByte(void)
 void UART_sendString(const uint8 *Str)
 {
     uint8 i = 0;
-	while(Str[i] != '/0')
+	while(Str[i] != '\0')
 	{
 		UART_sendByte(Str[i]);
 		i++;
 	}
+	UART_sendByte('\r');
+	UART_sendByte('\n');
 }
 
 /* Function Name: UART_receiveString
@@ -89,10 +91,14 @@ void UART_receiveString(uint8 *Str)
 {
     uint8 i = 0;
 	Str[i] = UART_receiveByte();
-	while(Str[i] != '#')
+	UART_sendByte(Str[i]);
+	while(Str[i] != '\r')
 	{
 		i++;
 		Str[i] = UART_receiveByte();
+	    UART_sendByte(Str[i]);
+
 	}
 	Str[i] = '\0';
+	UART_sendByte('\n');
 }
