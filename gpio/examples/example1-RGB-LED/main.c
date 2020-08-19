@@ -22,23 +22,23 @@ int main()
     {
             if(led_select == 1)
             {
-                GPIO_writeData(PORTB, PIN0, HIGH);      /*red*/
-                GPIO_writeData(PORTC, PIN7, LOW);
-                GPIO_writeData(PORTF, PIN4, LOW);
+                GPIO_writeData(PORTF, PIN1, HIGH);      /*red*/
+                GPIO_writeData(PORTF, PIN2, LOW);
+                GPIO_writeData(PORTF, PIN3, LOW);
                 led_select++;
             }
             else if (led_select == 2 )
             {
-                GPIO_writeData(PORTB, PIN0, LOW);
-                GPIO_writeData(PORTC, PIN7, HIGH);      /*green*/
-                GPIO_writeData(PORTF, PIN4, LOW);
+                GPIO_writeData(PORTF, PIN0, LOW);
+                GPIO_writeData(PORTF, PIN2, HIGH);      /*green*/
+                GPIO_writeData(PORTF, PIN3, LOW);
                 led_select++;
             }
             else if (led_select == 3)
             {
-                GPIO_writeData(PORTB, PIN0, LOW);
-                GPIO_writeData(PORTC, PIN7, LOW);
-                GPIO_writeData(PORTF, PIN4, HIGH);      /*blue*/
+                GPIO_writeData(PORTF, PIN0, LOW);
+                GPIO_writeData(PORTF, PIN2, LOW);
+                GPIO_writeData(PORTF, PIN3, HIGH);      /*blue*/
                 led_select=1;                
             }
             delay();
