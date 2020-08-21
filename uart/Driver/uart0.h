@@ -32,5 +32,7 @@ void UART_sendString(const uint8 *Str);
 
 void UART_receiveString(uint8 *Str); // Receive until #
 
+void UART_sendNumber(uint16 out);
+
 
 #endif

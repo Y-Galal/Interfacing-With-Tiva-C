@@ -102,3 +102,33 @@ void UART_receiveString(uint8 *Str)
 	Str[i] = '\0';
 	UART_sendByte('\n');
 }
+
+/* Function Name: UART_sendNumber
+*  Fucntion description: Sends a number by converting its digits into a string
+*  
+*/
+void UART_sendNumber(uint16 out)
+{
+
+        uint8 c[10] = {0} ;
+        uint8 m;
+        sint8 i = 0 ;
+
+        if(out == 0)
+        {
+            c[0] = 48;
+            i = 0 ;
+        }
+        while(out)
+        {
+            m = out%10;
+            c[i++] = m + 48;
+            out = out/10;
+        }
+        while(i != -1)
+        {
+            UART_sendByte(c[i--]);
+        }
+        UART_sendByte('\r');
+        UART_sendByte('\n');
+}
